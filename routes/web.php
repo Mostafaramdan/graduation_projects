@@ -36,3 +36,4 @@ Route::get('/',['App\Http\Controllers\Auth\HomeController','redirectAfterLogin']
 route::view('/login','website.login')->name('website.login');
 route::post('/login',['App\Http\Controllers\Auth\LoginController','authenticate'])->name('post.login');
 Route::post('/logout', ['App\Http\Controllers\Auth\LoginController','logout'])->name('website.logout');
+

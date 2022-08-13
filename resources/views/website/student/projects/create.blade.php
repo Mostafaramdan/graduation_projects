@@ -115,6 +115,9 @@
                     });
                 }else  if(errors.status === 423 ){
                     alert(' You have already registered a project')
+                }else  if(errors.status === 488 ){
+                    var errors = $.parseJSON(errors.responseText);
+                    alert('It is not possible to add this project, because the percentage of quotes from other projects'+errors.message+"%");
                 }
                 $("#submit").attr('disabled',false).find('.spinner-border').addClass('d-none');
             }
