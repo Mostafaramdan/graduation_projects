@@ -70,6 +70,14 @@ class ProjectAdmin implements ProjectInterface,storeProjectAdmin
         $StoreProjectRequestByAdmin = new StoreProjectRequestByAdmin($request->all());
         $request->validate($StoreProjectRequestByAdmin->rules());
        
+        Project::chunk(10,function($projects) use ($request){
+            foreach($projects as $project){
+                $percent= compareStrings($project->description,$request->description);
+                if($percent>=40){
+                    abort(488,round($percent,2));
+                }
+            }
+        });
         $Project= Project::updateOrCreate([
             'name'=>$request->name,
             'description'=>$request->description,

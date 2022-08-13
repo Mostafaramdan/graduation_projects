@@ -76,14 +76,10 @@ class projectStudent implements ProjectInterface,storeProjectstudent
         if(AuthLogged()->project->count() || AuthLogged()->members->count()){
             abort(423);
         }
-        $invalidProject=false;
-        $lastpercent=0;
         Project::chunk(10,function($projects) use ($request){
             foreach($projects as $project){
                 $percent= compareStrings($project->description,$request->description);
                 if($percent>=40){
-                    $lastpercent=$percent;
-                    $invalidProject=true;
                     abort(488,round($percent,2));
                 }
             }
