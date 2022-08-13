@@ -1,0 +1,51 @@
+:root
+{
+    --bs-primary: rgba(39,70,102, 1);
+    --bs-secondary: rgb(159, 105, 253) serif;
+}
+
+.bg-white
+{
+    background-color:#ffffff;  
+}
+
+.bg-primary
+{
+    background-color:var(--bs-primary)!important; 
+}
+
+.text-primary {
+    color: var(--bs-primary)!important;
+}
+
+
+.accordion-item {
+    background-color: #fff;
+    border: none;
+    
+}
+
+.accordion-button {
+    background-color: #f2F2F2;
+    box-shadow: none;
+    border:none;
+    padding: 20px 50px;
+    margin: 4px 0;
+}
+.accordion-button:not(.collapsed)
+{
+    border-bottom: 4px solid var(--bs-primary);
+    color: var(--bs-primary);
+    font-weight: bold;
+    background-color: #f2F2F2; 
+} 
+
+.accordion-button:focus {
+    z-index: 3;
+    border-color: none;
+    outline: 0;
+    box-shadow: none;
+}
+
+
+
