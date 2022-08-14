@@ -64,7 +64,7 @@
                 $('.error-messages').remove();
             },
             success: function(response) {
-                location.href="{{route('project.adminApproval')}}"
+                location.href="{{route('project.myProjects')}}"
             },
             error: function(errors) {
                 if(errors.status === 422 ){
