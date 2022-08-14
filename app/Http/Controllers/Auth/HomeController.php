@@ -7,8 +7,8 @@ class HomeController
     public  $adminRoute,$studentRoute;
     public function __construct()
     {
-        $this->studentRoute=route('project.index');
-        $this->adminRoute=route('project.index');
+        $this->studentRoute=route('project.main');
+        $this->adminRoute=route('project.main');
     }
 
     public function redirectAfterLogin()
