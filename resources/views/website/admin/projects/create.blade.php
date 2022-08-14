@@ -40,13 +40,20 @@
 <script>
     $("#newMember").click(function(e){
         e.preventDefault(); 
-        let element = $('.unique-member:first').clone();
-        $('.list-members').append(element)
+        if($('.unique-member').length < 6){
+            let element = $('.unique-member:first').clone();
+            $('.list-members').append(element)
+        }else{
+            alert("The maximum number of graduation project team members is 6 members")
+        }
     });
     $('body').on("click",".delete-member",function(e){
         e.preventDefault(); 
-        if($('.unique-member').length > 4)
+        if($('.unique-member').length > 2  ){
             $(this).closest('.unique-member').remove();
+        }else{
+            alert("The minimum number of graduation project team members is 2 members")
+        }
     });
     $("body").on('submit','#create_project',function(e){
         e.preventDefault(); 
