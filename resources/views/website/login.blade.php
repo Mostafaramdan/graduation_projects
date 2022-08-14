@@ -22,7 +22,15 @@
             <form class="m-4" action="{{route('post.login')}}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <label for="username" class="form-label">Student ID</label>
+                    <label for="username" class="form-label">Select Type</label>
+                   <select name="type"  class="form-control">
+                        <option value="Doctor">Doctor</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Student">Student</option>
+                   </select>
+                </div>
+                <div class="mb-3">
+                    <label for="username" class="form-label">User Name</label>
                     <input type="text" placeholder="Student ID" class="form-control" name="username" aria-describedby="username">
                 </div>
                 <div class="mb-3">
