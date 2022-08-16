@@ -57,4 +57,9 @@ class Student extends Authenticatable
     {
         return $this->hasMany(ProjectMembers::class, 'students_id');
     }
+
+    function authType()
+    {
+        return 'student';
+    }
 }

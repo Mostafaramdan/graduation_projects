@@ -18,7 +18,7 @@ class admin
     public function handle(Request $request, Closure $next)
     {
 
-        $Auth= Auth::user()??Auth::guard('students')->user()??null;
+        $Auth= Auth::user()??Auth::guard('students')->user()??Auth::guard('doctors')->user()??null;
         if($Auth)
             return $next($request);
 

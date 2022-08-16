@@ -9,16 +9,21 @@ class HomeController
     {
         $this->studentRoute=route('project.main');
         $this->adminRoute=route('project.main');
+        $this->doctorRoute=route('project.main');
     }
 
     public function redirectAfterLogin()
     {
         $authLogged= AuthLogged();
-        if($authLogged){
-            $redirect = $authLogged->isAdmin()?$this->adminRoute: $this->studentRoute;
-            return redirect($redirect);
-        }else{
-            return redirect(route('website.login'));
-        }
+        if(!$authLogged) return redirect(route('website.login'));
+        
+        if($authLogged->authType()== 'admin')
+            $redirect = $this->adminRoute;
+        if($authLogged->authType()== 'doctor')
+            $redirect = $this->doctorRoute;
+        if($authLogged->authType()== 'student')
+            $redirect = $this->studentRoute;
+
+        return redirect($redirect);
     }
 }

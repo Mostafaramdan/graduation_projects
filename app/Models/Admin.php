@@ -25,5 +25,9 @@ class Admin extends Authenticatable
     {
         return true;
     }
+    function authType()
+    {
+        return 'admin';
+    }
     
 }

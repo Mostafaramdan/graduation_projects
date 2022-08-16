@@ -54,7 +54,10 @@ class LoginController extends Controller
             'password' => ['required']
         ]);
 
-        return self::studentAuth()??self::adminAuth()?? back()->withErrors([
+        return self::studentAuth()??
+               self::adminAuth()  ??
+               self::doctorAuth() ??
+                back()->withErrors([
             'username' => 'The provided credentials do not match our records.',
         ]);
     }
@@ -80,6 +83,13 @@ class LoginController extends Controller
     static function studentAuth()
     {
         if (Auth::guard('students')->attempt(['student_ID'=>request()->username,'password'=>request()->password])) {
+            return redirect(route('home'));
+        }
+    }
+
+    static function doctorAuth()
+    {
+        if (Auth::guard('doctors')->attempt(['email'=>request()->username,'password'=>request()->password])) {
             return redirect(route('home'));
         }
     }
