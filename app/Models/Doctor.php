@@ -12,8 +12,13 @@ class Doctor  extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'doctors';
 
-    function authType()
+    function authType() :string
     {
         return 'doctor';
     }
+    function projects ()
+    {
+        return $this->hasMany(Project::class, 'doctors_id');
+    }
+
 }

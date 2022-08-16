@@ -25,7 +25,7 @@ class Admin extends Authenticatable
     {
         return true;
     }
-    function authType()
+    function authType() :string
     {
         return 'admin';
     }

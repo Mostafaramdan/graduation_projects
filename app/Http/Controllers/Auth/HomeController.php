@@ -16,7 +16,6 @@ class HomeController
     {
         $authLogged= AuthLogged();
         if(!$authLogged) return redirect(route('website.login'));
-        
         if($authLogged->authType()== 'admin')
             $redirect = $this->adminRoute;
         if($authLogged->authType()== 'doctor')

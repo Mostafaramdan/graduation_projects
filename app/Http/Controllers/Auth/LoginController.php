@@ -89,6 +89,7 @@ class LoginController extends Controller
 
     static function doctorAuth()
     {
+       
         if (Auth::guard('doctors')->attempt(['email'=>request()->username,'password'=>request()->password])) {
             return redirect(route('home'));
         }

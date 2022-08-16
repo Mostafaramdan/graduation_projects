@@ -16,6 +16,9 @@ class ProjectFactory
             case 'admins': 
                 $projectClass = new ProjectAdmin();
             break;
+            case 'doctors': 
+                $projectClass = new ProjectDoctor();
+            break;
             default: 
                 $projectClass = new projectStudent();
             break;

@@ -30,7 +30,7 @@
                     <a class="nav-link {{ Route::currentRouteNamed('project.myProjects') ? 'active' : '' }}" href="{{route('project.myProjects')}}">Your Projects</a>
                 </li>
                 <li class="nav-item">
-                    @if(AuthLogged()->isAdmin())
+                    @if(AuthLogged()->authType() == 'admin')
                         <a class="nav-link {{ Route::currentRouteNamed('project.pending') ? 'active' : '' }}" href="{{route('project.pending')}}">pending Projects</a>
                     @else
                         <a class="nav-link {{ Route::currentRouteNamed('project') ? 'active' : '' }}" href="{{route('project.index')}}">available Projects</a>
