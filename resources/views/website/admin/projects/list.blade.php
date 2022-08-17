@@ -23,10 +23,10 @@
                                 <p>
                                 {{$project->description}}
                                 </p> 
-                                <!-- <div class="d-flex justify-content-center m-5">
+                                <div class="d-flex justify-content-center m-5">
 
-                                    <a href="{{route('project.apply',$project->id)}}" class="btn btn-block w-25 center-text " style=" background-color:#00264d;color:#fff"> Apply This Project</a>
-                                </div> -->
+                                    <a href="{{route('project.show',$project->id)}}" class="btn btn-block w-25 center-text " style=" background-color:#00264d;color:#fff"> preview This Project</a>
+                                </div>
 
                             </div>
                         </div>

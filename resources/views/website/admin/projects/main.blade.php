@@ -11,7 +11,8 @@
         <div class="col-md-1"></div>
         <div class="col-md-9 m-5 ">
             <div class="row justify-content-center">
-                <div class="col-md-4">
+                
+                <div class="col-md-3">
                     <div class="card" style="width: 18rem;padding:10%">
                         <img  style="height:200px"src="{{asset('Pending_Projects.png')}}" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -21,7 +22,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 offset-md-3 ">
+                <div class="col-md-3   offset-md-1">
                     <div class="card " style="width: 18rem;padding:10%">
                         <img  style="height:200px" src="{{asset('idea.png')}}" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -29,6 +30,17 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-3  offset-md-1 ">
+                    <div class="card " style="width: 18rem;padding:10%">
+                        <img  style="height:200px" src="{{asset('users.png')}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <a href="{{route('doctors.index')}}" > <h5 class="card-title"> Doctors and their students</h5></a>
+                        </div>
+                    </div>
+                </div>
+
+                
             </div>
         </div>
     </div>

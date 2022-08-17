@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('name');
             $table->integer('progress')->default(0);
             $table->longText('description');
+            $table->string('social_network')->nullable();
             $table->string('proposal')->nullable();
             $table->enum('status', ['pending','accept','decline','suggestByAdmin'])->default('pending');
 

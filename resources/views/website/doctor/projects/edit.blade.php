@@ -7,62 +7,34 @@
         <div class="col-md-2"></div>
         <div class="col-md-9 shadow-lg p-3 mb-5 bg-body rounded m-3">
             
-            <form id="create_project" class="m-5"  method="POST" action="{{route('project.store')}}" role="form" enctype="multipart/form-data">
+            <form id="create_project" class="m-5"  method="POST" action="{{route('project.update',$project->id)}}" role="form" enctype="multipart/form-data">
                 @csrf
-                <div class="mb-3">
+                @method("PUT")
+                <!-- <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Project Name</label>
-                    <input  type="text" placeholder="Project Name" class="form-control" id="exampleInputEmail1" name="name">
+                    <input  type="text" placeholder="Project Name" value="{{$project->name}}" class="form-control" id="exampleInputEmail1" name="name">
                 </div>
 
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Project Description</label>
-                    <textarea rows="8" placeholder="Project Description" name="description" class="form-control" id="exampleInputPassword1"></textarea>
+                    <textarea   rows="8" cols="50" placeholder="Project Description" name="description" class="form-control" id="exampleInputPassword1">{{$project->description}}</textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="proposal" class="form-label">Add Project Porposal</label>
-                    <input  class="form-control" type="file" id="proposal" name="proposal"  accept="application/pdf,application/vnd.ms-excel">
-                </div>
-                <div class="mb-3 shadow p-3 mb-5 bg-body rounded members">
-                    <label for="students" class="form-label">group ID</label>
-                    <button class="btn btn-success ml-3" style="margin-left:10%" id="newMember"> add new member</button>
-                    
-                    <div class="row mt-3">
-                        <div class="col-9 mb-3">
-                            <input type="text"  class="form-control" readonly value="{{AuthLogged()->student_ID}}" name="students[]" >
-                        </div>
-                        
-                    </div>
-                    <div class="m-1 list-members">
-                        @for($i=1 ;$i < 2 ; $i++)
-
-                            <div class="row unique-member">
-                                <div class="col-9 mb-3">
-                                    <input type="text" placeholder="student ID" class="form-control"  name="students[]" >
-                                </div>
-                                <div class="col-3">
-                                    <button class="btn btn-danger delete-member"> delete</button>
-                                </div>
-                            </div>
-
-                        @endfor
-
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="doctor" class="form-label">select Supervisor Doctor Name</label>
-                   
-                    <select class="form-control" id="doctor" name="doctor"  >
-                         <option value>Choose</option>
-                        @foreach($doctors as $doctor)
-                            <option value="{{$doctor->id}}">{{$doctor->name}}</option>
-                        @endforeach
-                    </select>
-                    @error('doctor')
-                        <span class="text-danger error-messages">{{$message}}</span>
-                    @enderror
-                </div>
+                    <input class="form-control" type="file" id="proposal" name="proposal"  accept="application/pdf,application/vnd.ms-excel">
+                </div> -->
                 
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Social Network Url</label>
+                    <input required type="text" placeholder="Social Network Url" value="{{$project->social_network}}" class="form-control" id="social_network" name="social_network">
+                </div>
+
+                <div class="mb-3">
+                    <label for="progress" class="form-label">Project Progress <span id="progress-result"><span></label>
+                    <input type="range" class="form-range" min="0" max="100" step="1" id="progress" name="progress" value="{{$project->progress}}">     
+                </div>
+               
                 <button type="submit" id ="submit" class="btn btn-primary ">
                     
                     <div class="spinner-border  d-none" role="status">
@@ -78,7 +50,7 @@
 <script>
     $("#newMember").click(function(e){
         e.preventDefault(); 
-        if($('.unique-member').length < 5){
+        if($('.unique-member').length < 6){
             let element = $('.unique-member:first').clone();
             $('.list-members').append(element)
         }else{
@@ -87,16 +59,23 @@
     });
     $('body').on("click",".delete-member",function(e){
         e.preventDefault(); 
-        if($('.unique-member').length > 1  ){
+        if($('.unique-member').length > 2  ){
             $(this).closest('.unique-member').remove();
         }else{
             alert("The minimum number of graduation project team members is 2 members")
         }
     });
-    $("body").on('submit','#create_project',function(e){
+    $("#progress-result").text(`(${$("#progress").val()}%)`);
+    $("body").on('input','#progress',function(e){
+        let value = $(this).val();
+        $("#progress-result").text(`(${value}%)`);
+    })
+
+
+    $("body").on('submit','#create_projectsss',function(e){
         e.preventDefault(); 
         let data = new FormData($(this)[0]);
-        console.log(data);
+
         $.ajax({
             url:$(this).attr('action'),
             data,
@@ -109,7 +88,7 @@
                 $('.error-messages').remove();
             },
             success: function(response) {
-                location.href="{{route('project.adminApproval')}}"
+                location.href="{{route('project.myProjects')}}"
             },
             error: function(errors) {
                 if(errors.status === 422 ){
@@ -117,7 +96,7 @@
                     $.each(errors.errors, function (key, val) {
                         if(key.includes('students')){
                             let inputName = key.split('.')[0];
-                            let index = key.split('.')[1] + 1;
+                            let index = key.split('.')[1];
                             console.log(`input[name='${inputName}[]']:eq(${index})`);
                             $(`input[name='${inputName}[]']:eq(${index})`).closest('div').append(`<span class="text-danger error-messages">${val[0]}</span>`)
                         }
@@ -128,11 +107,9 @@
                     });
                 }else  if(errors.status === 423 ){
                     alert(' You have already registered a project')
-                }else  if(errors.status === 424 ){
+                }else  if(errors.status === 488 ){
                     var errors = $.parseJSON(errors.responseText);
                     alert('It is not possible to add this project, because the percentage of quotes from other projects'+errors.message+"%");
-                }else  if(errors.status === 431 ){
-                    alert('It is not possible to add this project, because the doctor has a full number of students');
                 }
                 $("#submit").attr('disabled',false).find('.spinner-border').addClass('d-none');
             }

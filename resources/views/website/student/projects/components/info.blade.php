@@ -14,15 +14,7 @@
                         
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Updates
-                        </button>
-                        </h2>                
-                    </div>
-                </div>
+                
             </div>
         </div>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -69,7 +61,6 @@
                             <button class="btn w-25 center-text " style=" background-color:#00264d;color:#fff"> Send</button>
                         </div>
                         <div class="col-md-12">
-                            @include('website.student.projects.components.updates')
                         </div>
                     </div>
                 </div>

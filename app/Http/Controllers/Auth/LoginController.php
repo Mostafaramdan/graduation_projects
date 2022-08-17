@@ -98,7 +98,13 @@ class LoginController extends Controller
     static function logout()
     {
         $model = AuthLogged();
-        $model->getTable()=='admins'? Auth::logout():Auth::guard('students')->logout();
+        foreach(config('auth.guards') as $key=>$val){
+            if(Auth::guard($key)->check()) {
+                Auth::guard($key)->logout();
+                break;
+            }
+        }
+        // $model->getTable()=='admins'? Auth::guard('web')->logout():Auth::guard('students')->logout();
         return redirect(route('home'));
     }
 }

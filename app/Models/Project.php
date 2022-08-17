@@ -9,7 +9,7 @@ class Project extends Model
 {
     use HasFactory;
     protected $table = 'projects',
-    $fillable=['suggested_doctors_id','status','name','description','doctors_id','proposal','create_by','created_at'];
+    $fillable=['progress','social_network','suggested_doctors_id','status','name','description','doctors_id','proposal','create_by','created_at'];
     function leader()
     {
         return $this->belongsTo(Student::class,'create_by');

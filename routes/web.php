@@ -29,7 +29,7 @@ Route::middleware([admin::class])->group(function () {
     route::view('/adminApproval','website.student.projects.adminApproval')->name('project.adminApproval');;
     route::get('/pendingProject',['App\Http\Controllers\ProjectController','pendingProject'])->name('project.pending');;
     route::get('/project/changeStatus/{project}',['App\Http\Controllers\ProjectController','changeStatus'])->name('project.changeStatus');;
-
+    route::get('/doctors',['App\Http\Controllers\DoctorController','index'])->name('doctors.index');;
 });
 
 Route::get('/',['App\Http\Controllers\Auth\HomeController','redirectAfterLogin'] )->name('home');

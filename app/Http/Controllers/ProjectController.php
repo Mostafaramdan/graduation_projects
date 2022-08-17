@@ -104,7 +104,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return $this->ProjectFactory->edit($project);
     }
 
     /**
@@ -116,7 +116,7 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        return $this->ProjectFactory->update( $request,$project);
     }
 
     /**

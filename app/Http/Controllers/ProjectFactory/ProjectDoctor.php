@@ -113,7 +113,7 @@ class ProjectDoctor implements ProjectInterface,storeProjectstudent
      */
     public function show(Project $project)
     {
-        return view('website.doctor.projects.create');  
+        return view('website.doctor.projects.show',compact('project'));  
     }
 
     public function apply(Project $project)
@@ -131,7 +131,7 @@ class ProjectDoctor implements ProjectInterface,storeProjectstudent
      */
     public function edit(Project $project)
     {
-        return view('website.doctor.projects.create');  
+        return view('website.doctor.projects.edit',compact('project'));  
     }
 
     /**
@@ -143,7 +143,11 @@ class ProjectDoctor implements ProjectInterface,storeProjectstudent
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $project->update([
+            'progress'=>$request->progress,
+            'social_network'=>$request->social_network
+        ]);
+        return redirect(route('project.show',$project->id));
     }
 
     /**

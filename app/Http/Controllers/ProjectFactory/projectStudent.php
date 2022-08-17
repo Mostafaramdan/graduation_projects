@@ -80,10 +80,18 @@ class projectStudent implements ProjectInterface,storeProjectstudent
             foreach($projects as $project){
                 $percent= compareStrings($project->description,$request->description);
                 if($percent>=40){
-                    abort(488,round($percent,2));
+                    abort(424,round($percent,2));
                 }
             }
         });
+
+        ### check if doctor exceed limit of students;
+        $doctor= Doctor::find($request->doctor);
+        $projectsOfDoctor= Project::where('doctors_id',$request->doctor)->get();
+        if(ProjectMembers::whereIn('projects_id',$projectsOfDoctor->pluck('id'))->count() +count($request->students)  >=21){
+            abort(431);
+        }
+
         $StoreProjectRequest = new StoreProjectRequest($request->all());
         $request->validate($StoreProjectRequest->rules());
 

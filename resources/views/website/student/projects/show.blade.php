@@ -18,6 +18,12 @@
                             <h3>Doctor Name  :  {{$project->doctor->name}}</h3>
                             <br>
                             <br>
+                            @if($project->social_network)
+                                <h3>Social Network  :  <a target="_blank" href="//{{$project->social_network}}">{{$project->social_network}}</a></h3>
+                                <br>
+                                <br>
+                            @endif
+
                             <div class="col-md-12 mb-3">
                                 <h4>  
                                     <span style='display:block;letter-spacing: 0px;color: #707070;opacity: 1;font: normal normal medium 24px/32px Roboto;'> 

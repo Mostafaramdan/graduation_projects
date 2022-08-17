@@ -15,8 +15,9 @@ class DoctorController extends Controller
      */
     public function index()
     {
-        //
+        return view('website.doctor.list',['doctors'=>Doctor::paginate(10)]);  
     }
+
 
     /**
      * Show the form for creating a new resource.
