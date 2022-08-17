@@ -14,7 +14,7 @@ class StoreProjectRequestByAdmin extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return Auth::guard('doctors')->check();
     }
 
     /**
@@ -27,7 +27,7 @@ class StoreProjectRequestByAdmin extends FormRequest
         return [
             'name'=>'required|unique:projects,name,'.$this->projects_id,
             'description'=>'required|unique:projects,description,'.$this->projects_id,
-            "proposal"=>"required|file|mimes:pdf|max:10000",
+            "proposal"=>"nullable|file|mimes:pdf|max:10000",
         ];
     }
 }

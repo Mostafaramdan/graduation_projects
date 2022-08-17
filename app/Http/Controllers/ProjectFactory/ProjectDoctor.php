@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ProjectFactory;
 
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Http\Requests\StoreProjectRequestByAdmin;
 use App\Models\Project;
 use App\Models\Doctor;
 use App\Models\Student;
@@ -68,7 +69,7 @@ class ProjectDoctor implements ProjectInterface,storeProjectstudent
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreProjectRequest  $request
+     * @param  \App\Http\Requests\StoreProjectRequestByAdmin  $request
      * @return \Illuminate\Http\Response
      */
     public function store($request)
@@ -82,8 +83,8 @@ class ProjectDoctor implements ProjectInterface,storeProjectstudent
                 }
             }
         });
-        $StoreProjectRequest = new StoreProjectRequest($request->all());
-        $request->validate($StoreProjectRequest->rules());
+        $StoreProjectRequestByAdmin = new StoreProjectRequestByAdmin($request->all());
+        $request->validate($StoreProjectRequestByAdmin->rules());
 
         if($request->proposal){
             $file= uploadFile($request->proposal,'proposal');
