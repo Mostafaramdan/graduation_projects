@@ -39,6 +39,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteNamed('project.pending') ? 'active' : '' }}" href="{{route('project.pending')}}">pending Projects</a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteNamed('project.suggested') ? 'active' : '' }}" href="{{route('project.suggested')}}">Suggested Projects</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteNamed('project.create') ? 'active' : '' }}" href="{{route('project.create')}}">Add New Project</a>

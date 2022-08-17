@@ -28,6 +28,7 @@ Route::middleware([admin::class])->group(function () {
     route::get('/project/{project}/apply',['App\Http\Controllers\ProjectController','apply'])->name('project.apply');;
     route::view('/adminApproval','website.student.projects.adminApproval')->name('project.adminApproval');;
     route::get('/pendingProject',['App\Http\Controllers\ProjectController','pendingProject'])->name('project.pending');;
+    route::get('/suggestedProject',['App\Http\Controllers\ProjectController','suggestedProject'])->name('project.suggested');;
     route::get('/project/changeStatus/{project}',['App\Http\Controllers\ProjectController','changeStatus'])->name('project.changeStatus');;
     route::get('/doctors',['App\Http\Controllers\DoctorController','index'])->name('doctors.index');;
 });
