@@ -81,7 +81,10 @@ class ProjectController extends Controller
 
     public function changeStatus(Request $request,Project $project)
     {
-        $project->update(['status'=>$request->status]);
+        $project->update([
+            'status'=>$request->status,
+            'doctors_id'=>AuthLogged()->id
+        ]);
         return redirect(route('project.pending'));
     }
     
