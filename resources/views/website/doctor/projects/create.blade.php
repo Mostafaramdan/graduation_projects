@@ -71,7 +71,7 @@
                 $('.error-messages').remove();
             },
             success: function(response) {
-                location.href="{{route('project.myProjects')}}"
+                location.href="{{route('project.suggested')}}"
             },
             error: function(errors) {
                 if(errors.status === 422 ){
