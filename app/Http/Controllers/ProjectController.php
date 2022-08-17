@@ -79,6 +79,11 @@ class ProjectController extends Controller
         return $this->ProjectFactory->pendingProject();
     }
 
+    public function suggestedProject(Request $request)
+    {
+        return $this->ProjectFactory->suggestedProject();
+    }
+    
     public function changeStatus(Request $request,Project $project)
     {
         $project->update([
