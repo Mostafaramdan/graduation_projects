@@ -22,14 +22,14 @@
                     </div>
                 </div>
 
-                <div class="col-md-3   offset-md-1">
+                <!-- <div class="col-md-3   offset-md-1">
                     <div class="card " style="width: 18rem;padding:10%">
                         <img  style="height:200px" src="{{asset('idea.png')}}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <a href="{{route('project.create')}}" > <h5 class="card-title">Add New Projects</h5></a>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="col-md-3  offset-md-1 ">
                     <div class="card " style="width: 18rem;padding:10%">
