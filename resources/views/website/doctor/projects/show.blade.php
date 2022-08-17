@@ -17,9 +17,11 @@
                             <h3>{{$project->name}}</h3>
                             <br>
                             <br>
-                            <h3>Team Leader Name :  {{$project->leader->name}}</h3>
-                            <br>
-                            <br>
+                            @if($project->leader)
+                                <h3>Team Leader Name :  {{$project->leader->name}}</h3>
+                                <br>
+                                <br>
+                            @endif
                             <h3>Doctor Name  :  {{$project->doctor->name}}</h3>
                             <br>
                             <br>
