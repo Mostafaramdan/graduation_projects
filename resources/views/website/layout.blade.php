@@ -41,9 +41,12 @@
                         <a class="nav-link {{ Route::currentRouteNamed('project') ? 'active' : '' }}" href="{{route('project.index')}}">available Projects</a>
                     @endif
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteNamed('project.create') ? 'active' : '' }}" href="{{route('project.create')}}">Add New Project</a>
-                </li>
+                @if(AuthLogged()->authType() != 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteNamed('project.create') ? 'active' : '' }}" href="{{route('project.create')}}">Add New Project</a>
+                    </li>
+                @endif
+
                 <li class="nav-item ">
                     <a class="nav-link" onClick="$('#logout-form').submit()" href="#">logout</a>
                     <form id="logout-form" action="{{ route('website.logout') }}" method="POST" >
