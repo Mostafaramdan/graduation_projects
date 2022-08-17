@@ -11,12 +11,17 @@
         <div class="col-md-1"></div>
         <div class="col-md-9 m-5 ">
             <div class="row justify-content-center">
-                <div class="col-md-12 mb-3">
-                    <h4>Your Project Status <span style='color:yellow;'> In Progress</span></h4>
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                @if($project)
+
+                    <div class="col-md-12 mb-3">
+                        <h4>Your Project Status <span style='color:yellow;'> In Progress</span></h4>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{$project->progress}}%;" aria-valuenow="{{$project->progress}}" aria-valuemin="0" aria-valuemax="100">{{$project->progress}}%</div>
+                        </div>
                     </div>
-                </div>
+
+                @endif
+
                 <div class="col-md-3 offset-md-1" style="cursor:pointer" onClick="location.href='{{route('project.myProjects')}}'">
                     <div class="card" style="width: 18rem;padding:10%">
                         <img style="height:250px" src="{{asset('create_project.png')}}" class="card-img-top" alt="...">

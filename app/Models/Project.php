@@ -25,5 +25,4 @@ class Project extends Model
         return $this->belongsToMany(Student::class, 'project_members','projects_id','students_id');
     }
 
-    
 }

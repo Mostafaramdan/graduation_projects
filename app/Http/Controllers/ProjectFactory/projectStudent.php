@@ -35,7 +35,8 @@ class projectStudent implements ProjectInterface,storeProjectstudent
 
     public function main()
     {
-        return view('website.student.projects.main');  
+        $project = AuthLogged()->project->first();
+        return view('website.student.projects.main',compact('project'));  
     }
 
      /**
