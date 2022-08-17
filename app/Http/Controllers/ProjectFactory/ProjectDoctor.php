@@ -143,7 +143,7 @@ class ProjectDoctor implements ProjectInterface,storeProjectstudent
     function suggestedProject()
     {
         return view('website.admin.projects.pending',[
-            'projects'=>Project::where('status','pending')
+            'projects'=>Project::where('status','suggestByAdmin')
             ->where('doctors_id',AuthLogged()->id)        
 
             ->paginate(10)
