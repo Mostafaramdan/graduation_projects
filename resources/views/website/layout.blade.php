@@ -26,22 +26,27 @@
                 <li class="nav-item">
                     <a class="nav-link {{ Route::currentRouteNamed('project.main') ? 'active' : '' }}" aria-current="page" href="{{route('project.main')}}">Home</a>
                 </li>
-                <li class="nav-item">
-                    @if(AuthLogged()->authType() == 'admin')
-                        <a class="nav-link {{ Route::currentRouteNamed('project.index') ? 'active' : '' }}" href="{{route('project.index')}}">All Projects</a>
-                    @else
-                        <a class="nav-link {{ Route::currentRouteNamed('project.myProjects') ? 'active' : '' }}" href="{{route('project.myProjects')}}">Your Projects</a>
-                    
-                    @endif
-                </li>
-                <li class="nav-item">
-                    @if(AuthLogged()->authType() == 'admin')
+                @if(AuthLogged()->authType() == 'admin')
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteNamed('project.index') ? 'active' : '' }}" href="{{route('project.index')}}">Suggested Projects</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteNamed('project.pending') ? 'active' : '' }}" href="{{route('project.pending')}}">pending Projects</a>
-                    @elseif(AuthLogged()->authType() == 'student')
-                        <a class="nav-link {{ Route::currentRouteNamed('project') ? 'active' : '' }}" href="{{route('project.index')}}">available Projects</a>
-                    @endif
-                </li>
-                @if(AuthLogged()->authType() != 'admin')
+                    </li>
+                @elseif(AuthLogged()->authType() == 'doctor')
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteNamed('project.myProjects') ? 'active' : '' }}" href="{{route('project.myProjects')}}">Your Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteNamed('project.pending') ? 'active' : '' }}" href="{{route('project.pending')}}">pending Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteNamed('project.create') ? 'active' : '' }}" href="{{route('project.create')}}">Add New Project</a>
+                    </li>
+                @elseif(AuthLogged()->authType() == 'student')
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteNamed('project.myProjects') ? 'active' : '' }}" href="{{route('project.myProjects')}}">Your Projects</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteNamed('project.create') ? 'active' : '' }}" href="{{route('project.create')}}">Add New Project</a>
                     </li>

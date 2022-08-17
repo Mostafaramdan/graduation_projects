@@ -17,7 +17,8 @@ class ProjectAdmin implements ProjectInterface,storeProjectAdmin
      */
     public function index()
     {
-        return view('website.admin.projects.list',['projects'=>Project::paginate(10)]);  
+        return view('website.admin.projects.list',[
+            'projects'=>Project::whereNotNull('suggested_doctors_id')->paginate(10)]);  
     }
 
     /**
