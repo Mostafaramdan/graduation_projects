@@ -46,7 +46,9 @@ class ProjectDoctor implements ProjectInterface,storeProjectstudent
 
     public function myProjects()
     {
-        $projects= Project::where('doctors_id',AuthLogged()->id)->paginate(10);
+        $projects= Project::where('doctors_id',AuthLogged()->id)
+                        ->where('status','accept')
+                        ->paginate(10);
         return view('website.doctor.projects.list',compact('projects'));
     }
 
