@@ -30,8 +30,14 @@
                     <label for="students" class="form-label">group ID</label>
                     <button class="btn btn-success ml-3" style="margin-left:10%" id="newMember"> add new member</button>
                     
+                    <div class="row mt-3">
+                        <div class="col-9 mb-3">
+                            <input type="text"  class="form-control" readonly value="{{AuthLogged()->student_ID}}" name="students[]" >
+                        </div>
+                        
+                    </div>
                     <div class="m-1 list-members">
-                        @for($i=1 ;$i < 3 ; $i++)
+                        @for($i=1 ;$i < 2 ; $i++)
 
                             <div class="row unique-member">
                                 <div class="col-9 mb-3">
@@ -73,9 +79,9 @@
     </div>
 </div>
 <script>
-    $("#newMember").click(function(e){
+   $("#newMember").click(function(e){
         e.preventDefault(); 
-        if($('.unique-member').length < 6){
+        if($('.unique-member').length < 5){
             let element = $('.unique-member:first').clone();
             $('.list-members').append(element)
         }else{
@@ -84,7 +90,7 @@
     });
     $('body').on("click",".delete-member",function(e){
         e.preventDefault(); 
-        if($('.unique-member').length > 2  ){
+        if($('.unique-member').length > 1  ){
             $(this).closest('.unique-member').remove();
         }else{
             alert("The minimum number of graduation project team members is 2 members")

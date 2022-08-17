@@ -85,23 +85,18 @@ class ProjectDoctor implements ProjectInterface,storeProjectstudent
         $StoreProjectRequest = new StoreProjectRequest($request->all());
         $request->validate($StoreProjectRequest->rules());
 
+        if($request->proposal){
+            $file= uploadFile($request->proposal,'proposal');
+        }
         $Project= Project::updateOrCreate(['id'=>$request->projects_id],[
             'name'=>$request->name,
-            'status'=>'pending',
+            'status'=>'suggestByAdmin',
             'description'=>$request->description,
-            'doctors_id'=>$request->doctor,
-            'proposal'=>uploadFile($request->proposal,'proposal'),
-            'create_by'=>AuthLogged()->id,
+            'doctors_id'=>AuthLogged()->id,
+            'proposal'=>$file??null,
+            'suggested_doctors_id'=>AuthLogged()->id,
             'created_at'=>now()
         ]);
-        $data=[];
-        foreach($request->students as $studentID){
-            $data[]=[
-                'students_id'=>(Student::firstWhere('student_ID',$studentID))->id,
-                'projects_id'=>$Project->id
-            ];
-        }
-        ProjectMembers::insert($data);
         return response(200);
     }
 
