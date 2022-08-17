@@ -73,9 +73,7 @@ class ProjectDoctor implements ProjectInterface,storeProjectstudent
      */
     public function store($request)
     {
-        if(AuthLogged()->project->count() || AuthLogged()->members->count()){
-            abort(423);
-        }
+       
         Project::chunk(10,function($projects) use ($request){
             foreach($projects as $project){
                 $percent= compareStrings($project->description,$request->description);
