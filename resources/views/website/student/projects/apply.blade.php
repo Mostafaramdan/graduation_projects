@@ -58,7 +58,7 @@
                     <select class="form-control" id="doctor" name="doctor"  >
                          <option value>Choose</option>
                         @foreach($doctors->where('id',$project->doctors_id) as $doctor)
-                            <option value="{{$doctor->id}} @select($project->doctors_id == $doctor->id)">{{$doctor->name}}</option>
+                            <option value="{{$doctor->id}} " @select($project->doctors_id == $doctor->id)>{{$doctor->name}}</option>
                         @endforeach
                     </select>
                     @error('doctor')
