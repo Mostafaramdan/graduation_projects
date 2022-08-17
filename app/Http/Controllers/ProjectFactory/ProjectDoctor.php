@@ -134,6 +134,12 @@ class ProjectDoctor implements ProjectInterface,storeProjectstudent
         return view('website.doctor.projects.edit',compact('project'));  
     }
 
+    function pendingProject()
+    {
+        return view('website.admin.projects.pending',[
+            'projects'=>Project::where('status','pending')->paginate(10)]);  
+
+    }
     /**
      * Update the specified resource in storage.
      *
