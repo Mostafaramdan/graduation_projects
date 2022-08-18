@@ -2,14 +2,7 @@
 @section('content')
 
 <div class="container text-center">
-    <section class="content-header">
-        <div class="container-fluid row d-flex justify-content-center ">
-            <div class="alert alert-danger col-sm-6 text-center" role="alert">
-                Note that ! <br> 
-                The last date for discussion is ( {{date('Y').'-'.$project->last_semester->to??''}} )
-            </div>
-        </div>
-    </section>
+    @include('website.student.projects.session')
     <div class="col-md-9"></div>
    </div>
     <div class="row">
