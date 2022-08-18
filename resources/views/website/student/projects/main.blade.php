@@ -12,8 +12,17 @@
         <div class="col-md-9 m-5 ">
             <div class="row justify-content-center">
                 @if($project)
-
+               
                     <div class="col-md-12 mb-3">
+                        <section class="content-header">
+                            <div class="container-fluid row d-flex justify-content-center ">
+                                <div class="alert alert-danger col-sm-6 text-center" role="alert">
+                                    Note that ! <br> 
+                                    The last date for discussion is ( {{date('Y').'-'.$project->last_semester->to??''}} )
+                                </div>
+                            </div>
+                        </section>
+
                         <h4>Your Project Status <span style='color:yellow;'> In Progress</span></h4>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: {{$project->progress}}%;" aria-valuenow="{{$project->progress}}" aria-valuemin="0" aria-valuemax="100">{{$project->progress}}%</div>

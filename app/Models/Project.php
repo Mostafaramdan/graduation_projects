@@ -9,7 +9,7 @@ class Project extends Model
 {
     use HasFactory;
     protected $table = 'projects',
-    $fillable=['progress','social_network','suggested_doctors_id','status','name','description','doctors_id','proposal','create_by','created_at'];
+    $fillable=['last_semester_id','progress','social_network','suggested_doctors_id','status','name','description','doctors_id','proposal','create_by','created_at'];
     function leader()
     {
         return $this->belongsTo(Student::class,'create_by');
@@ -25,4 +25,8 @@ class Project extends Model
         return $this->belongsToMany(Student::class, 'project_members','projects_id','students_id');
     }
 
+    function last_semester()
+    {
+        return $this->belongsTo(Semester::class,'last_semester_id');
+    }
 }

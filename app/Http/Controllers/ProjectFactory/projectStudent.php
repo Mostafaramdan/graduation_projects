@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use App\Models\Doctor;
 use App\Models\Student;
+use App\Models\Semester;
 use App\Models\ProjectMembers;
 use App\Http\Controllers\ProjectFactory\interfaces\storeProjectstudent;
 use App\Http\Controllers\ProjectFactory\ProjectInterface;
@@ -95,7 +96,10 @@ class projectStudent implements ProjectInterface,storeProjectstudent
 
         $StoreProjectRequest = new StoreProjectRequest($request->all());
         $request->validate($StoreProjectRequest->rules());
-
+        
+        $current_Semester_number= Semester::where('from','<',date('m-d'))->where('to','>',date('m-d'))->first()->id;
+        $last_Semester= $current_Semester_number+2 > 3? ($current_Semester_number+2)%3:$current_Semester_number+2;;
+        
         $Project= Project::updateOrCreate(['id'=>$request->projects_id],[
             'name'=>$request->name,
             'status'=>'pending',
@@ -103,6 +107,7 @@ class projectStudent implements ProjectInterface,storeProjectstudent
             'doctors_id'=>$request->doctor,
             'proposal'=>uploadFile($request->proposal,'proposal'),
             'create_by'=>AuthLogged()->id,
+            'last_semester_id'=>$last_Semester,
             'created_at'=>now()
         ]);
         $data=[];
