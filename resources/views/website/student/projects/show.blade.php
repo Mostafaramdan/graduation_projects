@@ -20,7 +20,7 @@
                             <br>
                             <br>
                             @if($project->social_network)
-                                <h3>Social Network  :  <a target="_blank" href="//{{$project->social_network}}">{{$project->social_network}}</a></h3>
+                                <h3>Social Network  :  <a target="_blank" href="{{$project->social_network}}">{{$project->social_network}}</a></h3>
                                 <br>
                                 <br>
                             @endif
