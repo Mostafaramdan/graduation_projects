@@ -53,7 +53,7 @@
                                     <div class="col-md-9 offset-md-3">
 
                                         <a class="btn  w-25  border border-5 " href="{{route('project.changeStatus',$project->id)}}?status=accept" style="color:#fff; background-color:#00264d">Approve</a>
-                                        <button class="btn btn-light w-25 border border-5 border-primary" href="{{route('project.changeStatus',$project->id)}}?status=decline">Decline</button>
+                                        <a class="btn btn-light w-25 border border-5 border-primary" href="{{route('project.changeStatus',$project->id)}}?status=decline">Decline</a>
 
                                     </div>
                                 </div>
