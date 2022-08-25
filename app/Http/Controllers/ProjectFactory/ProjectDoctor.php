@@ -157,6 +157,7 @@ class ProjectDoctor implements ProjectInterface,storeProjectstudent
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+        
         $project->update([
             'progress'=>$request->progress,
             'social_network'=>$request->social_network

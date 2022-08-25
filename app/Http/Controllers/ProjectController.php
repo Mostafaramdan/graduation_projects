@@ -79,6 +79,15 @@ class ProjectController extends Controller
         return $this->ProjectFactory->pendingProject();
     }
 
+    
+
+    function acceptedProject()
+    {
+        return view('website.admin.projects.accepted',[
+            'projects'=>Project::where('status','accept')->paginate(10)]);  
+
+    }
+
     public function suggestedProject(Request $request)
     {
         return $this->ProjectFactory->suggestedProject();
@@ -90,6 +99,8 @@ class ProjectController extends Controller
             'status'=>$request->status,
             'doctors_id'=>AuthLogged()->id
         ]);
+        if($request->status == 'decline')
+            $project->delete();
         return redirect(route('project.pending'));
     }
     

@@ -62,8 +62,29 @@
                         <span class="text-danger error-messages">{{$message}}</span>
                     @enderror
                 </div>
-                
-                <button type="submit" id ="submit" class="btn btn-primary ">
+                <br>
+                <br>
+                <div class="mb-3">
+
+                    <label for="doctor" class="form-label">Choose sesmter</label>
+                    @foreach($next_two_Semester as $semester)
+                        <div class="form-check">
+                            <input class="form-check-input"  type="radio" value="{{$semester->id}}" name="last_semester_id" id="semester-{{$semester->id}}">
+                            <label class="form-check-label" for="semester-{{$semester->id}}">
+                                {{$semester->name}}
+                                <!-- <span class='text-danger'>
+                                   <strong class='text-primary'>Start At</strong> {{ date('Y').' '.$semester->from}}
+                                   <strong class='text-primary'>End At</strong> {{ date('Y').' '.$semester->to}}
+
+                                </span>  -->
+                            </label>
+                        </div>
+                    @endforeach
+
+                   
+                </div>
+               
+                <button type="submit" id ="submit" class="btn btn-primary mt-4 ">
                     
                     <div class="spinner-border  d-none" role="status">
                         <span class="sr-only">Loading...</span>
@@ -80,6 +101,7 @@
         e.preventDefault(); 
         if($('.unique-member').length < 5){
             let element = $('.unique-member:first').clone();
+            element.find('input').val('')
             $('.list-members').append(element)
         }else{
             alert("The maximum number of graduation project team members is 6 members")
@@ -133,6 +155,11 @@
                     alert('It is not possible to add this project, because the percentage of quotes from other projects'+errors.message+"%");
                 }else  if(errors.status === 431 ){
                     alert('It is not possible to add this project, because the doctor has a full number of students');
+                }else  if(errors.status === 343 ){
+                    var errors = JSON.parse($.parseJSON(errors.responseText).message);
+                    errors.forEach(student_ID => {
+                        alert(`${student_ID}  registered a project before.`)
+                    });
                 }
                 $("#submit").attr('disabled',false).find('.spinner-border').addClass('d-none');
             }

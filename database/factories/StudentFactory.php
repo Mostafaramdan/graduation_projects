@@ -17,7 +17,11 @@ class StudentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->name(),
+            'is_active' => 1,
+            'created_at' => now(),
+            'password' => bcrypt('123456'),
+            'student_ID'=>'4'.date('y').rand(10000,99999).'@hti.edu.eg'
         ];
     }
 }

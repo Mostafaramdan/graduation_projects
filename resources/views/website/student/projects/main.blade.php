@@ -16,7 +16,7 @@
                     <div class="col-md-12 mb-3">
                         @include('website.student.projects.session')
 
-                        <h4>Your Project Status <span style='color:yellow;'> In Progress</span></h4>
+                        <h4>Your Project Status <span style='color:yellow;'> {{$project->status}}</span></h4>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: {{$project->progress}}%;" aria-valuenow="{{$project->progress}}" aria-valuemin="0" aria-valuemax="100">{{$project->progress}}%</div>
                         </div>

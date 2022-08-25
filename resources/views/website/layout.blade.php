@@ -33,6 +33,9 @@
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteNamed('project.pending') ? 'active' : '' }}" href="{{route('project.pending')}}">pending Projects</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteNamed('project.accepted') ? 'active' : '' }}" href="{{route('project.accepted')}}">accepted Projects</a>
+                    </li>
                 @elseif(AuthLogged()->authType() == 'doctor')
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteNamed('project.myProjects') ? 'active' : '' }}" href="{{route('project.myProjects')}}">Your Projects</a>
@@ -54,7 +57,9 @@
                         <a class="nav-link {{ Route::currentRouteNamed('project.create') ? 'active' : '' }}" href="{{route('project.create')}}">Add New Project</a>
                     </li>
                 @endif
-
+                <li class="nav-item">
+                        <a class="nav-link {{ Route::currentRouteNamed('reserPassword.index') ? 'active' : '' }}" href="{{route('reserPassword.index')}}">reset Password</a>
+                    </li>
                 <li class="nav-item ">
                     <a class="nav-link" onClick="$('#logout-form').submit()" href="#">logout</a>
                     <form id="logout-form" action="{{ route('website.logout') }}" method="POST" >

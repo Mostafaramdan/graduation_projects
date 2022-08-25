@@ -61,9 +61,18 @@ class projectStudent implements ProjectInterface,storeProjectstudent
      */
     public function create()
     {
+        $date= date('m-d');
+        
+        // we get current semseter 
+        $current_Semester_number= Semester::where('from','<',$date)->where('to','>',$date)->pluck('id');
+        
+        // we get here other semster that student can discuss his project // result will be next two semster
+        $next_two_Semester= Semester::whereNotIn('id',$current_Semester_number)->get();
+
         return view('website.student.projects.create',
             [
                 'doctors'=>Doctor::all(),
+                'next_two_Semester'=>$next_two_Semester
             ]);  
     }
 
@@ -93,12 +102,22 @@ class projectStudent implements ProjectInterface,storeProjectstudent
         if(ProjectMembers::whereIn('projects_id',$projectsOfDoctor->pluck('id'))->count() +count($request->students)  >=21){
             abort(431);
         }
+        
+        $signed_student=[];
+        foreach($request->students as $studentID){
+                $students_id= Student::firstWhere('student_Id',$studentID)->id;
+                if(ProjectMembers::with('student')->where('students_id',$students_id)->count()>0  ){
+                    $signed_student[]=$studentID;
+            }
+        }
+        if(count($signed_student)>0)
+            abort(343,json_encode($signed_student));
 
         $StoreProjectRequest = new StoreProjectRequest($request->all());
         $request->validate($StoreProjectRequest->rules());
         
-        $current_Semester_number= Semester::where('from','<',date('m-d'))->where('to','>',date('m-d'))->first()->id;
-        $last_Semester= $current_Semester_number+2 > 3? ($current_Semester_number+2)%3:$current_Semester_number+2;;
+        // $current_Semester_number= Semester::where('from','<',date('m-d'))->where('to','>',date('m-d'))->first()->id;
+        // $last_Semester= $current_Semester_number+2 > 3? ($current_Semester_number+2)%3:$current_Semester_number+2;;
         
         $Project= Project::updateOrCreate(['id'=>$request->projects_id],[
             'name'=>$request->name,
@@ -107,7 +126,7 @@ class projectStudent implements ProjectInterface,storeProjectstudent
             'doctors_id'=>$request->doctor,
             'proposal'=>uploadFile($request->proposal,'proposal'),
             'create_by'=>AuthLogged()->id,
-            'last_semester_id'=>$last_Semester,
+            'last_semester_id'=>$request->last_semester_id,
             'created_at'=>now()
         ]);
         $data=[];

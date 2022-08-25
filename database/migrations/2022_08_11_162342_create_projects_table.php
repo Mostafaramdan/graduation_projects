@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('last_semester_id')->nullable();
             $table->string('social_network')->nullable();
             $table->string('proposal')->nullable();
-            $table->enum('status', ['pending','accept','decline','suggestByAdmin'])->default('pending');
+            $table->enum('status', ['pending','accept','decline','suggestByAdmin','finished'])->default('pending');
 
 
             $table->timestamps();

@@ -7,19 +7,20 @@
     <div class="row">
         <div class="col-md-11 m-5 ">
             <div class="row justify-content-center">
-                <div class="d-flex align-items-center shadow-lg p-3 mb-5 bg-body rounded">
-                    <div class="flex-grow-1 ms-3 " style=" color:#00264d" >
-                    <div class="accordion-body">
-                        <br>
-                        <h3> {{$project->name}}</h3>
-                        <br>
+                <a  id="print" class="btn btn-block w-25 center-text mb-5 "  style=" background-color:#00264d;color:#fff" href="#">Print This Project</a>
+                <div  class="d-flex align-items-center shadow-lg p-3 mb-5 bg-body rounded " >
+                    <div class="flex-grow-1 ms-3 " style=" color:#00264d"  id="printProject">
+                        <div class="accordion-body">
+                            <br>
+                            <h3> {{$project->name}}</h3>
+                            <br>
 
-                        <p>Project Porposal:  {{$project->description}}</p>
-                        <p>
-                            
-                        </p>
-                        <br>
-                        <h6 >
+                            <p>Project Porposal:  {{$project->description}}</p>
+                            <p>
+                                
+                            </p>
+                            <br>
+                            <h6 >
                                 <i class="fa fa-paperclip"></i>
                                 Attached File : {{$project->proposal}}
                                 <i class="fa-solid fa-download " style="margin-left:20px;cursor:pointer" onClick="location.href='{{asset($project->proposal)}}'"></i>
@@ -41,14 +42,6 @@
                             <h4>
                                 supervisor doctor name : <a style="color:#d63384">{{$project->doctor->name}}</a>
                             </h4>
-                            <!-- <div class="row">
-                                <div class="col-md-9 offset-md-3">
-
-                                    <a class="btn  w-25  border border-5 " href="{{route('project.changeStatus',$project->id)}}?status=accept" style="color:#fff; background-color:#00264d">Approve</a>
-                                    <button class="btn btn-light w-25 border border-5 border-primary" href="{{route('project.changeStatus',$project->id)}}?status=decline">Decline</button>
-
-                                </div>
-                            </div> -->
                         </div>
                     </div>
                 </div>              
@@ -56,5 +49,9 @@
         </div>
     </div>
 </div>
-
+<script>
+    $("#print").on('click',function(){
+        print();
+    })
+</script>
 @endsection

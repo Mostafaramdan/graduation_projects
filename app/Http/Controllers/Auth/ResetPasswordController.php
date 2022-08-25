@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
-use App\Http\Requests\Dashboard\ResetPasswordRequest;
+use App\Http\Requests\ResetPasswordRequest;
 
 class ResetPasswordController extends Controller
 {
@@ -32,7 +32,7 @@ class ResetPasswordController extends Controller
 
     public static function index()
     {
-        return view('pages.ResetPassword.index');
+        return view('website.ResetPassword');
     }
 
     static function updatePassword(ResetPasswordRequest $request)
@@ -40,7 +40,7 @@ class ResetPasswordController extends Controller
         $auth= AuthLogged();
         $auth->password= bcrypt($request->password);
         $auth->save();
-        session()->flash('success', __('gars.the_process_completed_successful'));
+        session()->flash('success', __('the password has been updated successfully'));
         return back();
     }
 }

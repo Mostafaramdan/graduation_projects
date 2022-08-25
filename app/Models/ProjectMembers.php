@@ -10,5 +10,8 @@ class ProjectMembers extends Model
     use HasFactory;
     protected $table = 'project_members',
     $fillable=['students_id','projects_id'];
-
+    function student()
+    {
+        return $this->belongsTo(Student::class,'students_id');
+    } 
 }

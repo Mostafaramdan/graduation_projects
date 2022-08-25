@@ -16,8 +16,20 @@ return new class extends Migration
         Schema::create('project_members', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('students_id');
-            $table->unsignedBigInteger('projects_id');
+
+            $table->foreignId('projects_id')
+                    ->references('id')
+                    ->on('projects')
+                    ->constrained()
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
+
+            $table->foreignId('students_id')
+                    ->references('id')
+                    ->on('students')
+                    ->constrained()
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
 
             $table->timestamps();
         });

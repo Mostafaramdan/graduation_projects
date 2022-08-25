@@ -30,7 +30,8 @@ class StoreProjectRequest extends FormRequest
             'doctor'=>'required|exists:doctors,id',
             "proposal"=>"required|file|mimes:pdf|max:10000",
             'students'=>"required|array|distinct|min:2|max:6|exists:students,student_ID",
-            'students.*'=>"required|distinct|exists:students,student_ID"
+            'students.*'=>"required|distinct|exists:students,student_ID",
+            "last_semester_id"=>"required|exists:semesters,id"
         ];
     }
 }
