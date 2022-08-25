@@ -19,7 +19,7 @@
                                 <img src="{{asset('users.png')}}" alt="idea" height="150" width="150" class="rounded float-start shadow-lg p-3 mb-5 bg-body rounded" style="border-radius:50% !important">
                             </div>
                             <div class="flex-grow-1 ms-3 " style=" color:#00264d" >
-                                <h3>{{$doctor->name}}</h3>
+                                <h3>{{$doctor->name}} - ({{$project->status}})</h3>
                                 <p>
                                     @foreach($doctor->projects as $project )
                                         <div class="list-group m-4">
