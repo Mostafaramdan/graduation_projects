@@ -19,7 +19,7 @@
                                 <img src="{{asset('idea.png')}}" alt="idea" height="150" width="150" class="rounded float-start shadow-lg p-3 mb-5 bg-body rounded" style="border-radius:50% !important">
                             </div>
                             <div class="flex-grow-1 ms-3 " style=" color:#00264d" >
-                                <h3>{{$project->name}}  - ({{$project->status}})</h3>
+                                <h3>{{$project->name}}  - ({{$project}})</h3>
                                 <p>
                                 {{$project->description}}
                                 </p> 
