@@ -58,8 +58,6 @@ class LoginController extends Controller
                self::doctorAuth() ??
                 back()->withInput()->withErrors([
             'username' => 'The provided credentials do not match our records.',
-            'user'=>$request->username,
-            'type'=>$request->type,
         ]);
     }
 
