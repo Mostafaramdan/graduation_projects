@@ -24,14 +24,14 @@
                 <div class="mb-3">
                     <label for="username" class="form-label">Select Type</label>
                    <select name="type"  class="form-control" id="type">
-                        <option value="Doctor">Doctor</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Student">Student</option>
+                        <option value="Doctor" @selected(old('type') == 'Doctor')>Doctor</option>
+                        <option value="Admin" @selected(old('type') == 'Admin')>Admin</option>
+                        <option value="Student" @selected(old('type') == 'Student')>Student</option>
                    </select>
                 </div>
                 <div class="mb-3 ">
                     <label for="username" class="form-label">User Name</label>
-                    <input type="text" placeholder="Student ID" class="form-control" name="username" aria-describedby="username">
+                    <input type="text" placeholder="Student ID" value="{{old('username')}}" class="form-control" name="username" aria-describedby="username">
                     <div class="invalid-feedback">
                         Please Enter valid username.
                     </div>

@@ -104,7 +104,6 @@ class LoginController extends Controller
                 break;
             }
         }
-        // $model->getTable()=='admins'? Auth::guard('web')->logout():Auth::guard('students')->logout();
         return redirect(route('home'));
     }
 }

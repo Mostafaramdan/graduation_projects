@@ -24,20 +24,20 @@
         <div class="collapse navbar-collapse" style="margin-left:20%" id="navbarSupportedContent">
             <ul class="navbar-nav ">
                 <li class="nav-item">
-                    <a class="nav-link {{ Route::currentRouteNamed('project.main') ? 'active' : '' }}" aria-current="page" href="{{route('project.main')}}">Home</a>
+                    <a class="nav-link {{Route::currentRouteNamed('project.main') ? 'active' : '' }}" aria-current="page" href="{{route('project.main')}}">Home</a>
                 </li>
                 @if(AuthLogged()->authType() == 'admin')
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteNamed('project.index') ? 'active' : '' }}" href="{{route('project.index')}}">Suggested Projects</a>
-                    </li>
-                    <li class="nav-item">
+                    </li> -->
+                    <!-- <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteNamed('project.pending') ? 'active' : '' }}" href="{{route('project.pending')}}">pending Projects</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteNamed('project.accepted') ? 'active' : '' }}" href="{{route('project.accepted')}}">accepted Projects</a>
-                    </li>
+                    </li> -->
                 @elseif(AuthLogged()->authType() == 'doctor')
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteNamed('project.myProjects') ? 'active' : '' }}" href="{{route('project.myProjects')}}">Your Projects</a>
                     </li>
                     <li class="nav-item">
@@ -48,20 +48,20 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Route::currentRouteNamed('project.create') ? 'active' : '' }}" href="{{route('project.create')}}">Add New Project</a>
-                    </li>
+                    </li> -->
                 @elseif(AuthLogged()->authType() == 'student')
-                    <li class="nav-item">
-                        <a class="nav-link {{ Route::currentRouteNamed('project.myProjects') ? 'active' : '' }}" href="{{route('project.myProjects')}}">Your Projects</a>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link {{Route::currentRouteNamed('project.myProjects') ? 'active' : '' }}" href="{{route('project.myProjects')}}">Your Projects</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::currentRouteNamed('project.create') ? 'active' : '' }}" href="{{route('project.create')}}">Add New Project</a>
-                    </li>
+                        <a class="nav-link {{Route::currentRouteNamed('project.create') ? 'active' : '' }}" href="{{route('project.create')}}">Add New Project</a>
+                    </li> -->
                 @endif
                 <li class="nav-item">
-                        <a class="nav-link {{ Route::currentRouteNamed('reserPassword.index') ? 'active' : '' }}" href="{{route('reserPassword.index')}}">reset Password</a>
+                        <a class="nav-link {{Route::currentRouteNamed('reserPassword.index') ? 'active' : '' }}" href="{{route('reserPassword.index')}}">Reset Password</a>
                     </li>
                 <li class="nav-item ">
-                    <a class="nav-link" onClick="$('#logout-form').submit()" href="#">logout</a>
+                    <a class="nav-link" onClick="$('#logout-form').submit()" href="#">Logout</a>
                     <form id="logout-form" action="{{ route('website.logout') }}" method="POST" >
                         @csrf
                         <input   type="submit" class="d-none" href="#">
