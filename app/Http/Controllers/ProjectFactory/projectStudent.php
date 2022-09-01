@@ -41,9 +41,9 @@ class projectStudent implements ProjectInterface,storeProjectstudent
     }
 
      /**
-     * Display list of projects of this Auth
-     *
-     * @return \Illuminate\Http\Response
+         * Display list of projects of this Auth
+         *
+         * @return \Illuminate\Http\Response
      */
 
     public function myProjects()
@@ -87,14 +87,19 @@ class projectStudent implements ProjectInterface,storeProjectstudent
         if(AuthLogged()->project->count() || AuthLogged()->members->count()){
             abort(423);
         }
-        Project::chunk(10,function($projects) use ($request){
-            foreach($projects as $project){
-                $percent= compareStrings($project->description,$request->description);
-                if($percent>=40){
-                    abort(424,round($percent,2));
+
+        $StoreProjectRequest = new StoreProjectRequest($request->all());
+        $request->validate($StoreProjectRequest->rules());
+
+        if(! $request->projects_id)
+            Project::chunk(10,function($projects) use ($request){
+                foreach($projects as $project){
+                    $percent= compareStrings($project->description,$request->description);
+                    if($percent>=40){
+                        abort(424,round($percent,2));
+                    }
                 }
-            }
-        });
+            });
 
         ### check if doctor exceed limit of students;
         $doctor= Doctor::find($request->doctor);
@@ -113,8 +118,6 @@ class projectStudent implements ProjectInterface,storeProjectstudent
         if(count($signed_student)>0)
             abort(343,json_encode($signed_student));
 
-        $StoreProjectRequest = new StoreProjectRequest($request->all());
-        $request->validate($StoreProjectRequest->rules());
         
         // $current_Semester_number= Semester::where('from','<',date('m-d'))->where('to','>',date('m-d'))->first()->id;
         // $last_Semester= $current_Semester_number+2 > 3? ($current_Semester_number+2)%3:$current_Semester_number+2;;
@@ -153,9 +156,21 @@ class projectStudent implements ProjectInterface,storeProjectstudent
 
     public function apply(Project $project)
     {
+
+        $date= date('m-d'); // current date 
+
+        // we get current semseter 
+        $current_Semester_number= Semester::where('from','<',$date)->where('to','>',$date)->pluck('id');
+
+        // we get here other semster that student can discuss his project // result will be next two semster
+        $next_two_Semester= Semester::whereNotIn('id',$current_Semester_number)->get();
+        
+        
         return view('website.student.projects.apply',[
             'project'=>$project,
-            'doctors'=>Doctor::all()
+            'doctors'=>Doctor::all(),
+            'next_two_Semester'=>$next_two_Semester
+
         ]);
     }
     /**

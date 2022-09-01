@@ -41,7 +41,7 @@
 
                             <div class="row unique-member">
                                 <div class="col-9 mb-3">
-                                    <input type="text" placeholder="student ID" class="form-control" id="students" name="students[]" >
+                                    <input type="text" placeholder="student ID" class="form-control"  name="students[]" >
                                 </div>
                                 <div class="col-3">
                                     <button class="btn btn-danger delete-member"> delete</button>
@@ -52,6 +52,28 @@
 
                     </div>
                 </div>
+
+                <div class="mb-3">
+
+                <label for="doctor" class="form-label">Choose sesmter</label>
+                @foreach($next_two_Semester as $semester)
+                    <div class="form-check">
+                        <input class="form-check-input"  type="radio" value="{{$semester->id}}" name="last_semester_id" id="semester-{{$semester->id}}">
+                        <label class="form-check-label" for="semester-{{$semester->id}}">
+                            {{$semester->name}}
+                            <!-- <span class='text-danger'>
+                            <strong class='text-primary'>Start At</strong> {{ date('Y').' '.$semester->from}}
+                            <strong class='text-primary'>End At</strong> {{ date('Y').' '.$semester->to}}
+
+                            </span>  -->
+                        </label>
+                    </div>
+                @endforeach
+
+
+                </div>
+
+
                 <div class="mb-3">
                     <label for="doctor" class="form-label">select Supervisor Doctor Name</label>
                    
@@ -79,10 +101,11 @@
     </div>
 </div>
 <script>
-   $("#newMember").click(function(e){
+    $("#newMember").click(function(e){
         e.preventDefault(); 
         if($('.unique-member').length < 5){
             let element = $('.unique-member:first').clone();
+            element.find('input').val('')
             $('.list-members').append(element)
         }else{
             alert("The maximum number of graduation project team members is 6 members")
@@ -99,7 +122,7 @@
     $("body").on('submit','#create_project',function(e){
         e.preventDefault(); 
         let data = new FormData($(this)[0]);
-
+        console.log(data);
         $.ajax({
             url:$(this).attr('action'),
             data,
@@ -120,7 +143,7 @@
                     $.each(errors.errors, function (key, val) {
                         if(key.includes('students')){
                             let inputName = key.split('.')[0];
-                            let index = key.split('.')[1];
+                            let index = parseInt(key.split('.')[1]) ;
                             console.log(`input[name='${inputName}[]']:eq(${index})`);
                             $(`input[name='${inputName}[]']:eq(${index})`).closest('div').append(`<span class="text-danger error-messages">${val[0]}</span>`)
                         }
@@ -131,6 +154,16 @@
                     });
                 }else  if(errors.status === 423 ){
                     alert(' You have already registered a project')
+                }else  if(errors.status === 424 ){
+                    var errors = $.parseJSON(errors.responseText);
+                    alert('It is not possible to add this project, because the percentage of quotes from other projects'+errors.message+"%");
+                }else  if(errors.status === 431 ){
+                    alert('It is not possible to add this project, because the doctor has a full number of students');
+                }else  if(errors.status === 343 ){
+                    var errors = JSON.parse($.parseJSON(errors.responseText).message);
+                    errors.forEach(student_ID => {
+                        alert(`${student_ID}  registered a project before.`)
+                    });
                 }
                 $("#submit").attr('disabled',false).find('.spinner-border').addClass('d-none');
             }
